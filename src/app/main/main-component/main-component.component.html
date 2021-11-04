@@ -1,0 +1,49 @@
+<div class="container edit">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="main-title">Pedidos pendientes</h1>
+    </div>
+  </div>
+  <div class="row second-row">
+    <div class="col-8 filters">
+      <div id="content">
+        <div class="sect-sp-div">
+          <span class="sect-sp">Niveles</span>
+        </div>
+        <div class="autocomplete">
+          <div (click)="suggest()" class="chips-input-container">
+            <div class="user-chip" *ngFor="let class of classSelects">
+              <span class="spn-name-sle">{{ class.name }}</span>
+              <span (click)="deleteSelects(class)" class="delete-icon-chip"
+                >&#10006;</span
+              >
+            </div>
+          </div>
+
+          <div class="autocomplete-items" *ngIf="show">
+            <div
+              *ngFor="let s of classes"
+              [ngClass]="isSelected(s) ? 'selected-suggestion' : ''"
+              (click)="selectSuggestion(s)"
+            >
+              <span class="sp-complete">{{ s.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 filters">
+      <button type="button" class="btn btn-labeled btn-danger p-style">
+        <span class="btn-label"><i class="fa fa-filter"></i></span>Filtrar
+      </button>
+    </div>
+  </div>
+  <div class="row data-cont">
+    <h1 *ngIf="!sw" class="h1">Selecciona un nivel</h1>
+    <db-ngtreegrid
+      *ngIf="sw"
+      [data]="products"
+      [configs]="configs"
+    ></db-ngtreegrid>
+  </div>
+</div>
